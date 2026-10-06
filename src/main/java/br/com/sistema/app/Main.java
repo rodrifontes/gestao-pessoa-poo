@@ -24,16 +24,15 @@ public class Main {
             System.out.println("4 - Remover Pessoa");
             System.out.println("Digite a opção desejada:");
             
-            opcao = input.nextInt();
+            opcao = Integer.parseInt(input.nextLine());
             
             if(opcao == 1){
-                Scanner inputCadastro = new Scanner(System.in);
                 System.out.println("Digite o nome da pessoa:");
-                String nome = inputCadastro.nextLine();
+                String nome = input.nextLine();
                 System.out.println("Digite o CPF da pessoa:");
-                String cpf = inputCadastro.nextLine();
+                String cpf = input.nextLine();
                 System.out.println("Digite o e-mail da pessoa:");
-                String email = inputCadastro.nextLine();
+                String email = input.nextLine();
                 Pessoa pessoa = new Pessoa(nome, cpf, email);
                 repository.salvar(pessoa);
             }
@@ -46,21 +45,19 @@ public class Main {
             }
             
             if(opcao == 3) {
-                Scanner inputAtualizacao = new Scanner(System.in);
                 System.out.println("Digite o ID da pessoa a ser atualizada:");
-                Integer id = inputAtualizacao.nextInt();
+                Integer id = Integer.parseInt(input.nextLine());
                 Pessoa pessoa = repository.buscarPorId(id);
                 if(pessoa == null) {
                     System.out.println("Pessoa não encontrada!");
                 } else {
-                    inputAtualizacao = new Scanner(System.in);
                     System.out.println("Pessoa encontrada: " + pessoa);
                     System.out.println("Digite o novo nome:");
-                    String nome = inputAtualizacao.nextLine();
+                    String nome = input.nextLine();
                     System.out.println("Digite o novo CPF:");
-                    String cpf = inputAtualizacao.nextLine();
+                    String cpf = input.nextLine();
                     System.out.println("Digite o novo email:");
-                    String email = inputAtualizacao.nextLine();
+                    String email = input.nextLine();
                     Pessoa pessoaAtualizada = new Pessoa(id, nome, cpf, email);
                     repository.atualizar(pessoaAtualizada);
                 }
@@ -69,7 +66,7 @@ public class Main {
             if(opcao == 4) {
                 Scanner inputRemocao = new Scanner(System.in);
                 System.out.println("Digite o ID da pessoa a ser excluida:");
-                Integer id = inputRemocao.nextInt();
+                Integer id = Integer.parseInt(input.nextLine());
                 Pessoa pessoa = repository.buscarPorId(id);
                 repository.deletar(id);
                 System.out.println("Pessoa excluida com sucesso!");

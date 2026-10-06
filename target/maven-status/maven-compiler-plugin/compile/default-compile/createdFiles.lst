@@ -1,5 +1,8 @@
+br\com\sistema\repository\ConnectionFactory.class
+br\com\sistema\repository\PessoaRepositoryMemory.class
+br\com\sistema\exceptions\PessoaIdNotFound.class
+br\com\sistema\app\TestConectionFactory.class
 br\com\sistema\app\Main.class
 br\com\sistema\repository\PessoaRepository.class
-br\com\sistema\repository\PessoaRepositoryMemory.class
 br\com\sistema\model\Pessoa.class
-br\com\sistema\exceptions\PessoaIdNotFound.class
+br\com\sistema\repository\PessoaRepositoryJDBC.class

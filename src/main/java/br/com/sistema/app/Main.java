@@ -3,16 +3,17 @@ package br.com.sistema.app;
 import br.com.sistema.exceptions.PessoaIdNotFound;
 import br.com.sistema.model.Pessoa;
 import br.com.sistema.repository.PessoaRepository;
+import br.com.sistema.repository.PessoaRepositoryJDBC;
 import br.com.sistema.repository.PessoaRepositoryMemory;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws PessoaIdNotFound{
+    public static void main(String[] args) throws PessoaIdNotFound, Exception{
         
         Scanner input = new Scanner(System.in);
-        PessoaRepository repository = new PessoaRepositoryMemory();
+        PessoaRepository repository = new PessoaRepositoryJDBC();
         Integer opcao;
         
         do {            

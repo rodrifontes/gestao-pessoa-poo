@@ -10,4 +10,15 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>Registropessoal</exec.mainClass>
     </properties>
+    
+    <dependencies>
+
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.8</version>
+        </dependency>
+
+    </dependencies>
 </project>

@@ -47,9 +47,15 @@ public class PessoaRepositoryMemory implements PessoaRepository {
         if (p == null) {
             throw new PessoaIdNotFound();
         }
-        p.setNome(pessoa.getNome());
-        p.setEmail(pessoa.getEmail());
-        p.setCpf(pessoa.getCpf());
+        if(!"".equals(pessoa.getNome())) {
+            p.setNome(pessoa.getNome());
+        }
+        if(!"".equals(pessoa.getEmail())){
+            p.setEmail(pessoa.getEmail());
+        }
+        if(!"".equals(pessoa.getCpf())) {
+            p.setCpf(pessoa.getCpf());
+        }
     }
 
     @Override

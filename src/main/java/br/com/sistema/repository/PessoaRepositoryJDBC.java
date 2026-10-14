@@ -28,7 +28,7 @@ public class PessoaRepositoryJDBC implements PessoaRepository {
             ps.setString(3, pessoa.getEmail());
             ps.executeUpdate();  
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class PessoaRepositoryJDBC implements PessoaRepository {
     public List<Pessoa> listarTodos() {
         List<Pessoa> pessoas = new ArrayList<Pessoa>();
         try {
-            String sql = "SELECT * FROM pessoa;";
+            String sql = "SELECT * FROM pessoa ORDER BY nome;";
         
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -49,24 +49,61 @@ public class PessoaRepositoryJDBC implements PessoaRepository {
                 pessoas.add(pessoa);
             }
         } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return pessoas;
     }
 
     @Override
     public Pessoa buscarPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "SELECT * FROM pessoa WHERE id = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Pessoa pessoa = null;
+            if(rs.next()){
+                pessoa = new Pessoa();
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setCpf(rs.getString("cpf"));
+            }
+            return pessoa;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @Override
     public void atualizar(Pessoa pessoa) throws PessoaIdNotFound {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Pessoa p = buscarPorId(pessoa.getId());
+            if (p == null) {
+                throw new PessoaIdNotFound();
+            }
+            String sql = "UPDATE pessoa SET nome = ?, email = ?, cpf = ? WHERE id = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, pessoa.getNome());
+            ps.setString(2, pessoa.getEmail());
+            ps.setString(3, pessoa.getCpf());
+            ps.setInt(4, pessoa.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void deletar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "DELETE FROM pessoa WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
     
 }

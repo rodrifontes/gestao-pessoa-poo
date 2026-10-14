@@ -23,6 +23,7 @@ public class Main {
             System.out.println("2 - Listar Todas");
             System.out.println("3 - Atualizar Pessoa");
             System.out.println("4 - Remover Pessoa");
+            System.out.println("5 - Buscar por ID");
             System.out.println("Digite a opção desejada:");
             
             opcao = Integer.parseInt(input.nextLine());
@@ -65,12 +66,18 @@ public class Main {
             }
             
             if(opcao == 4) {
-                Scanner inputRemocao = new Scanner(System.in);
                 System.out.println("Digite o ID da pessoa a ser excluida:");
                 Integer id = Integer.parseInt(input.nextLine());
                 Pessoa pessoa = repository.buscarPorId(id);
                 repository.deletar(id);
                 System.out.println("Pessoa excluida com sucesso!");
+            }
+            
+            if(opcao == 5) {
+                System.out.println("Digite o ID da pessoa:");
+                Integer id = Integer.parseInt(input.nextLine());
+                Pessoa pessoa = repository.buscarPorId(id);
+                System.out.println(pessoa);
             }
             
         } while (opcao != 0);
